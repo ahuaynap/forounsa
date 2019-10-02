@@ -1,0 +1,17 @@
+node_modules/
+
+*.exe
+*.com
+*.class
+*.dll
+*.o
+*.so
+
+*.7z
+*.dmg
+*.iso
+*.jar
+*.tar
+*.rar
+*.tar
+*.zip
