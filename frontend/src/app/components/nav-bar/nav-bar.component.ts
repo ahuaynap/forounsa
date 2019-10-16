@@ -8,7 +8,6 @@ import { Component, OnInit } from "@angular/core";
 export class NavBarComponent implements OnInit {
   title = "Foro Universitario";
   navigation_items = ["Cursos", "Publicaciones", "Log In"];
-  ruta_actual = "Cursos";
 
   constructor() {}
 
