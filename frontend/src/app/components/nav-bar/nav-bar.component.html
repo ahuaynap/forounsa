@@ -9,7 +9,8 @@
     <ul class="form-inline navbar-nav ml-auto">
       <ng-container *ngFor="let nav_item of navigation_items">
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="{{nav_item | lowercase | removeWhiteSpaces}}">{{nav_item}}
+          <a class="nav-link" (click)="updateNavBar($event)" name="{{nav_item | lowercase | removeWhiteSpaces}}"
+            routerLink="{{nav_item | lowercase | removeWhiteSpaces}}">{{nav_item}}
           </a>
         </li>
 

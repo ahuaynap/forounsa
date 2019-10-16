@@ -7,9 +7,25 @@ import { Component, OnInit } from "@angular/core";
 })
 export class NavBarComponent implements OnInit {
   title = "Foro Universitario";
-  navigation_items = ["Cursos", "Publicaciones", "Log In"];
+  navigation_items = ["Log In"];
 
   constructor() {}
 
   ngOnInit() {}
+
+  updateNavBar(event) {
+    var ruta = event.target.name;
+
+    if (ruta == "login") {
+      this.navigation_items = [
+        "Inicio",
+        "Cursos",
+        "Publicaciones",
+        "Mis publicaciones",
+        "Logout"
+      ];
+    } else if (ruta == "logout") {
+      this.navigation_items = ["Log In"];
+    }
+  }
 }
