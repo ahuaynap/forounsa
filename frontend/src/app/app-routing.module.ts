@@ -5,12 +5,22 @@ import { PublicacionesComponent } from "./components/publicaciones/publicaciones
 import { LogInComponent } from "./components/log-in/log-in.component";
 import { LogoutComponent } from "./components/logout/logout.component";
 import { InicioComponent } from "./components/inicio/inicio.component";
+import { CursoComponent } from "./components/curso/curso.component";
+import { PublicarComponent } from './components/publicar/publicar.component';
 
 const routes: Routes = [
   { path: "inicio", component: InicioComponent },
   {
     path: "cursos",
     component: CursosComponent
+  },
+  {
+    path: "publicar",
+    component: PublicarComponent
+  },
+  {
+    path: "curso/:id",
+    component: CursoComponent
   },
   {
     path: "publicaciones",
