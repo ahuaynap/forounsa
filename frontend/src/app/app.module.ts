@@ -10,6 +10,7 @@ import { LogInComponent } from "./components/log-in/log-in.component";
 import { RemoveWhiteSpacesPipe } from "./pipes/remove-white-spaces.pipe";
 import { InicioComponent } from "./components/inicio/inicio.component";
 import { LogoutComponent } from "./components/logout/logout.component";
+import { PublicacionComponent } from './components/publicacion/publicacion.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LogoutComponent } from "./components/logout/logout.component";
     LogInComponent,
     RemoveWhiteSpacesPipe,
     InicioComponent,
-    LogoutComponent
+    LogoutComponent,
+    PublicacionComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
