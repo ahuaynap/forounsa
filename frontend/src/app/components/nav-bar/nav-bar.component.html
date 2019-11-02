@@ -7,7 +7,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="form-inline navbar-nav ml-auto">
-      <ng-container *ngFor="let nav_item of navigation_items">
+      <ng-container *ngFor="let nav_item of navigationItems">
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" (click)="updateNavBar($event)" name="{{nav_item | lowercase | removeWhiteSpaces}}"
             routerLink="{{nav_item | lowercase | removeWhiteSpaces}}">{{nav_item}}
