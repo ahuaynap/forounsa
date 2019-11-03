@@ -7,14 +7,21 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="form-inline navbar-nav ml-auto">
-      <ng-container *ngFor="let nav_item of navigationItems">
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" (click)="updateNavBar($event)" name="{{nav_item | lowercase | removeWhiteSpaces}}"
-            routerLink="{{nav_item | lowercase | removeWhiteSpaces}}">{{nav_item}}
-          </a>
-        </li>
-
-      </ng-container>
+      <li class="nav-item" *ngIf="!isLogged">
+        <a class="nav-link" routerLink="/login" >Login</a>
+      </li>
+      <li class="nav-item" *ngIf="isLogged">
+        <a class="nav-link" routerLink="/" >Inicio</a>
+      </li>
+      <li class="nav-item" *ngIf="isLogged">
+        <a class="nav-link" routerLink="/cursos">Cursos</a>
+      </li>
+      <li class="nav-item" *ngIf="isLogged">
+        <a class="nav-link" routerLink="/publicaciones">Mis publicaciones</a>
+      </li>
+      <li class="nav-item" *ngIf="isLogged">
+        <a class="nav-link" (click)="onLogout()">Cerrar Sesión</a>
+      </li>
     </ul>
   </div>
 </nav>

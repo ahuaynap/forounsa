@@ -1,36 +1,36 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { CursosComponent } from "./components/cursos/cursos.component";
-import { PublicacionesComponent } from "./components/publicaciones/publicaciones.component";
-import { LogInComponent } from "./components/log-in/log-in.component";
-import { LogoutComponent } from "./components/logout/logout.component";
-import { InicioComponent } from "./components/inicio/inicio.component";
-import { CursoComponent } from "./components/curso/curso.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { CursosComponent } from './components/cursos/cursos.component';
+import { PublicacionesComponent } from './components/publicaciones/publicaciones.component';
+import { LogInComponent } from './components/log-in/log-in.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { InicioComponent } from './components/inicio/inicio.component';
+import { CursoComponent } from './components/curso/curso.component';
 import { PublicarComponent } from './components/publicar/publicar.component';
 
 const routes: Routes = [
-  { path: "inicio", component: InicioComponent },
+  { path: '', component: InicioComponent },
   {
-    path: "cursos",
+    path: 'cursos',
     component: CursosComponent
   },
   {
-    path: "publicar",
+    path: 'publicar',
     component: PublicarComponent
   },
   {
-    path: "curso/:id",
+    path: 'curso/:id',
     component: CursoComponent
   },
   {
-    path: "publicaciones",
+    path: 'publicaciones',
     component: PublicacionesComponent
   },
   {
-    path: "login",
+    path: 'login',
     component: LogInComponent
   },
-  { path: "logout", component: LogoutComponent }
+  { path: 'logout', component: LogoutComponent }
 ];
 
 @NgModule({
