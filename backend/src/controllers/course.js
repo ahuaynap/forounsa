@@ -8,6 +8,8 @@ ctrl.index = async (req, res) =>{
 }
 ctrl.view = async(req, res) =>{
     const course = await Course.findById(req.params.id);
+    course.views = course.view + 1;
+    await course.save();
     res.json(course);
 }
 ctrl.create = async(req, res) =>{

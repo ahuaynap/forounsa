@@ -15,12 +15,26 @@ ctrl.view = async(req, res) =>{
     }
 }
 ctrl.create = async(req, res) =>{
-    const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-    })
-    await newUser.save();
-    res.json(newUser);
+    const user = await User.find({email:req.body.email});
+    if(user){
+        res.json(user);
+    }
+    else{
+        const newUser = new User({
+            name: req.body.name,
+            email: req.body.email,
+        })
+        await newUser.save();
+        res.json(newUser);
+    }
+}
+ctrl.subscription = async(req,res)=>{
+    const user = await User.findById(req.params.user_id);
+    if(user){
+        user.subscription.push(req.params.course_id);
+        await user.save();
+        res.json(user);
+    }
 }
 ctrl.update = async(req, res) =>{
     const currentUser = await User.findById(req.params.id);

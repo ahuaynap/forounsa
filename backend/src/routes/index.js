@@ -7,6 +7,7 @@ const course = require('../controllers/course');
 const career = require('../controllers/career');
 const user = require('../controllers/user');
 const notification = require('../controllers/notification');
+const like = require('../controllers/like');
  
 module.exports = app =>{
     
@@ -38,6 +39,7 @@ module.exports = app =>{
     router.get('/user',user.index);
     router.get('/user/:id',user.index);
     router.post('/user',user.create);
+    router.post('/user/subscription/:user_id/:course_id',user.subscription);
     router.put('/user/:id',user.update);
     router.delete('/user/:id',user.delete);
 
@@ -46,6 +48,12 @@ module.exports = app =>{
     router.post('/notification/comment/:user_id/:post_id',notification.comment);
     router.put('/notification/:id',notification.update);
     router.delete('/notification/:id',notification.delete);
+
+    router.get('/like/post/:post_id/:user_id',like.post);
+    router.post('/like/post/:post_id/:user_id',like.postchange);
+    router.get('/like/comment/:comment_id/:user_id',like.comment);
+    router.post('/like/comment/:post_id/:user_id',like.commentchange);
+
 
     app.use(router);
 }

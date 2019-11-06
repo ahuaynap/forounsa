@@ -4,5 +4,6 @@ module.exports = {
     Post: require('./post'),
     Comment: require('./comment'),
     User: require('./user'),
-    Notification: require('./notification')
+    Notification: require('./notification'),
+    Like: require('./like')
 }

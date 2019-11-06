@@ -33,7 +33,11 @@ ctrl.user = async(req, res) =>{
 
 ctrl.view = async(req, res) =>{
     const post = await Post.findById(req.params.id);
-    res.json(post);
+    if (post) {
+        post.views = post.views + 1;
+        await post.save(); 
+        res.json(post);    
+    }
 }
 
 ctrl.create = async(req, res) =>{
