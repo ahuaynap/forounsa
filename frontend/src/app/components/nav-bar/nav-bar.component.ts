@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,7 +10,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private authService: AuthService, private afAuth: AngularFireAuth) { }
+  constructor(private authService: AuthService, private afAuth: AngularFireAuth, private router: Router) { }
 
   public isLogged = false;
   public currentuser = '';
@@ -31,7 +32,10 @@ export class NavBarComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.logoutUser();
+    this.authService.logoutUser()
+      .then( auth => {
+        this.router.navigate(['/login']);
+      });
   }
 
 }

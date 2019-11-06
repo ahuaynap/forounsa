@@ -17,7 +17,7 @@ module.exports = app =>{
     router.put('/career/:id',career.update);
     router.delete('/career/:id',career.delete);
 
-    router.get('/course/career/:id_career',course.index);
+    router.get('/course',course.index);
     router.get('/course/:id',course.view);
     router.post('/course/:id_career',course.create);
     router.put('/course/:id',course.update);

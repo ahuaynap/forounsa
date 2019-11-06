@@ -3,7 +3,7 @@ const Career = require('../models/career');
 const ctrl = {}
 
 ctrl.index = async (req, res) =>{
-    const courses = await Course.find({idCareer: req.params.id_career});
+    const courses = await Course.find();
     res.json(courses);
 }
 ctrl.view = async(req, res) =>{
