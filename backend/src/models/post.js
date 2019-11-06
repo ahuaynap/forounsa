@@ -11,7 +11,7 @@ const PostSchema = new Schema({
     likes: { type: Number, default: 0 },
     fileUrl: { type: String },
     timestamp: { type: Date, default: Date.now },
-    state: { type: String, default: 'a' },
+    state: { type: String, default: 'a' }
 })
 
 module.exports = mongoose.model('Post', PostSchema);

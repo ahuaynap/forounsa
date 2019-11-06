@@ -22,8 +22,17 @@ ctrl.create = async(req, res) =>{
         res.json(newCourse);
     }
 }
-ctrl.update = (req, res) =>{
-    res.send('Update course');
+ctrl.update = async(req, res) =>{
+    const courseUpdated = await Course.findById(req.params.id);
+    if (courseUpdated ) {
+        const newCourse = new Course({
+            name: req.body.name,
+            description: req.body.description
+        });
+        newCourse.idCareer = courseUpdated.idCareer;
+        const course = await Course.findByIdAndUpdate(courseUpdated._id, newCourse);
+        res.json(course);
+    }
 }
 ctrl.delete = (req, res) =>{
     const courseDeleted = Course.findByIdAndRemove(req.params.id);

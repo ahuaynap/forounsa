@@ -24,6 +24,7 @@ ctrl.update = async (req, res) =>{
         description: req.body.description
     });
     const careerUpdated = await Career.findByIdAndUpdate(req.params.id, newCareer);
+    res.json(careerUpdated);
 }
 ctrl.delete = async (req, res) =>{
     const career = await Career.findByIdAndDelete(req.params.id);
