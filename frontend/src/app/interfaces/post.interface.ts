@@ -4,8 +4,8 @@ export interface Post {
     description: string;
     idCourse: string;
     idUser: string;
-    views: Number;
-    likes: Number;
+    views: number;
+    likes: number;
     fileUrl: string;
     timestamp: Date;
     state: string;
