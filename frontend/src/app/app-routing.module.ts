@@ -6,6 +6,7 @@ import { CoursesComponent } from './components/courses/courses.component';
 import { CourseComponent } from './components/course/course.component';
 import { Page404Component } from './components/page404/page404.component';
 import { PostComponent } from './components/post/post.component';
+import { PostsComponent } from './components/posts/posts.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'post/:id',
     component: PostComponent
+  },
+  {
+    path: 'posts',
+    component: PostsComponent
   },
   {
     path: '**',

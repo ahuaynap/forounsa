@@ -12,9 +12,9 @@
           <a class="nav-link" routerLink="/courses">Cursos</a>
         </li>
         <li class="nav-item" *ngIf="isLogged">
-          <a class="nav-link" routerLink="/">Mis publicaciones</a>
+          <a class="nav-link" routerLink="/posts">Mis publicaciones</a>
         </li>
-        <li class="nav-item" *ngIf="isLogged">
+        <li class="nav-item" *ngIf="isLogged" style="cursor: pointer">
           <a class="nav-link" (click)="onLogout()">Cerrar Sesión</a>
         </li>
       </ul>

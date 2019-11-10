@@ -39,13 +39,13 @@ module.exports = app =>{
     router.get('/user',user.index);
     router.get('/user/:id',user.index);
     router.post('/user',user.create);
-    router.post('/user/subscription/:user_id/:course_id',user.subscription);
+    router.get('/user/subscription/:user_id/:course_id',user.subscription);
     router.put('/user/:id',user.update);
     router.delete('/user/:id',user.delete);
 
     router.get('/notification/user/:user_id',notification.index);
-    router.post('/notification/like/:user_id/:post_id',notification.like);
-    router.post('/notification/comment/:user_id/:post_id',notification.comment);
+    router.get('/notification/like/:user_id/:post_id',notification.like);
+    router.get('/notification/comment/:user_id/:post_id',notification.comment);
     router.put('/notification/:id',notification.update);
     router.delete('/notification/:id',notification.delete);
 
@@ -54,6 +54,6 @@ module.exports = app =>{
     router.get('/like/comment/:comment_id/:user_id',like.comment);
     router.post('/like/comment/:post_id/:user_id',like.commentchange);
 
-
+    
     app.use(router);
 }

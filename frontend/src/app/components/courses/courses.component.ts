@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-courses',
@@ -10,14 +10,18 @@ export class CoursesComponent implements OnInit {
 
   public courses = [];
 
-  constructor( private dataService: DataService) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.getCourses();
+    this.getProduct();
   }
 
-  getCourses() {
-    console.log(this.dataService.getCourses());
+  getProduct() {
+    this.dataService.getCourses()
+      .subscribe(
+        res => console.log(res),
+        err => console.log(err)
+      );
   }
 
 }
