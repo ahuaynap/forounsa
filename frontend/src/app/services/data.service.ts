@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-import { Course } from '../interfaces/course.inteface';
+import { Course } from '../interfaces/course.interface';
 import { Post } from '../interfaces/post.interface';
 import { Comment } from '../interfaces/comment.interface';
 import { User } from '../interfaces/user.interface';
