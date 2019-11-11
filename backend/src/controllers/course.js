@@ -2,19 +2,23 @@ const Course = require('../models/course');
 const Career = require('../models/career');
 const ctrl = {}
 
-ctrl.index = async (req, res) =>{
+ctrl.index = async (req, res) => {
     const courses = await Course.find();
     res.json(courses);
 }
-ctrl.view = async(req, res) =>{
+ctrl.view = async (req, res) => {
     const course = await Course.findById(req.params.id);
     res.json(course);
 }
-ctrl.create = async(req, res) =>{
+ctrl.create = async (req, res) => {
     const career = await Career.findById(req.params.id_career);
     if (career) {
         const newCourse = new Course({
+            idCourse: req.body.idCourse,
+            idPrerequisite: req.body.idPrerequisite,
             name: req.body.name,
+            credit: req.body.credit,
+            semester: req.body.semester,
             description: req.body.description
         });
         newCourse.idCareer = career._id;
@@ -22,9 +26,9 @@ ctrl.create = async(req, res) =>{
         res.json(newCourse);
     }
 }
-ctrl.update = async(req, res) =>{
+ctrl.update = async (req, res) => {
     const courseUpdated = await Course.findById(req.params.id);
-    if (courseUpdated ) {
+    if (courseUpdated) {
         const newCourse = new Course({
             name: req.body.name,
             description: req.body.description
@@ -34,7 +38,7 @@ ctrl.update = async(req, res) =>{
         res.json(course);
     }
 }
-ctrl.delete = (req, res) =>{
+ctrl.delete = (req, res) => {
     const courseDeleted = Course.findByIdAndRemove(req.params.id);
     res.json(courseDeleted);
 }
