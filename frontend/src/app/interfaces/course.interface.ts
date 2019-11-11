@@ -1,11 +1,12 @@
 
 export interface Course {
+    id?: number;
     name: string;
     description: string;
     idCareer: string;
     prerequisites: string[];
-    views: Number;
-    likes: Number;
+    views: number;
+    likes: number;
     state: string;
 
 }

@@ -20,7 +20,7 @@ export class CoursesComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    //this.getCourses();
+    this.getProduct();
     this.malla = cytoscape({
       container: document.getElementById('malla'),
       elements: [{
@@ -72,23 +72,19 @@ export class CoursesComponent implements OnInit {
   }
 
 
-  /*this.malla = cytoscape({
-  container: document.getElementById('malla'),
-  elements: [{
-    data: {
-      id: 'a',
-      name: 'Chistemas'
-  
-    }
-  }]
-  
-  });*/
-
-
   getCourses() {
     this.dataService.getCourses().subscribe((courses) => {
 
     });
   }
+
+  getProduct() {
+    this.dataService.getCourses()
+      .subscribe(
+        res => console.log(res),
+        err => console.log(err)
+      );
+  }
+
 
 }
