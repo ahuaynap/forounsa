@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import { Course } from 'src/app/interfaces/course.inteface';
+import { Course } from 'src/app/interfaces/course.interface';
 import { DataService } from 'src/app/services/data.service';
 import { Post } from 'src/app/interfaces/post.interface';
 
