@@ -37,7 +37,7 @@ module.exports = app =>{
     router.delete('/comment/:id',comment.delete);
 
     router.get('/user',user.index);
-    router.get('/user/:id',user.index);
+    router.get('/user/:email',user.view);
     router.post('/user',user.create);
     router.get('/user/subscription/:user_id/:course_id',user.subscription);
     router.put('/user/:id',user.update);

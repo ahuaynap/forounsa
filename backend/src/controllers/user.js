@@ -6,7 +6,7 @@ ctrl.index = async(req, res) =>{
     res.json(users);
 }
 ctrl.view = async(req, res) =>{
-    const user = await User.findById(req.params.id);
+    const user = await User.findOne({email: req.params.email});
     if( user ) {
         res.json(user);
     }
@@ -15,18 +15,12 @@ ctrl.view = async(req, res) =>{
     }
 }
 ctrl.create = async(req, res) =>{
-    const user = await User.find({email:req.body.email});
-    if(user){
-        res.json(user);
-    }
-    else{
-        const newUser = new User({
-            name: req.body.name,
-            email: req.body.email,
-        })
-        await newUser.save();
-        res.json(newUser);
-    }
+    const user = new User({
+        name: req.body.name,
+        email: req.body.email
+    });
+    user.save();
+    res.json(user);
 }
 ctrl.subscription = async(req,res)=>{
     const user = await User.findById(req.params.user_id);
@@ -49,6 +43,7 @@ ctrl.update = async(req, res) =>{
 }
 ctrl.delete = async(req, res) =>{
     const deletedUser = await User.findByIdAndDelete(req.params.id);
+    res.json(deletedUser);
 }
 
 

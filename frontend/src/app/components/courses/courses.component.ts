@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { Course } from 'src/app/interfaces/course.inteface';
 
 @Component({
   selector: 'app-courses',
@@ -8,7 +9,7 @@ import { DataService } from '../../services/data.service';
 })
 export class CoursesComponent implements OnInit {
 
-  public courses = [];
+  public courses: Course[];
 
   constructor(private dataService: DataService) { }
 
@@ -19,7 +20,9 @@ export class CoursesComponent implements OnInit {
   getProduct() {
     this.dataService.getCourses()
       .subscribe(
-        res => console.log(res),
+        res => {
+          this.courses = res;
+        },
         err => console.log(err)
       );
   }

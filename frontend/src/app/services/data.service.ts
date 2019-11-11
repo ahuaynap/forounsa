@@ -72,8 +72,8 @@ export class DataService {
     return this.http.delete<Comment>(`${this.BASE_URL}/comment/${id}`);
   }
 
-  getUser(id: string): Observable<User> {
-    return this.http.get<User>(`${this.BASE_URL}/user/${id}`);
+  getUser(email: string): Observable<User> {
+    return this.http.get<User>(`${this.BASE_URL}/user/${email}`);
   }
 
   addUser(user: User): Observable<User> {

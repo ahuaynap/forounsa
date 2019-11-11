@@ -11,12 +11,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Sistemas Operativos</td>
-                    <td>5</td>
-                    <td>10</td>
-                    <td><a routerLink="/course/1" class="btn btn-secondary btn-sm">Ir al curso</a></td>
+                <tr *ngFor="let course of courses">
+                    <th scope="row">{{course._id}}</th>
+                    <td>{{course.name}}</td>
+                    <td>{{course.views}}</td>
+                    <td>{{course.likes}}</td>
+                    <td><a routerLink="/course/{{course._id}}" class="btn btn-secondary btn-sm">Ir al curso</a></td>
                 </tr>
             </tbody>
         </table>
