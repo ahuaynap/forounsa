@@ -23,24 +23,7 @@ export class CoursesComponent implements OnInit {
     this.getProduct();
     this.malla = cytoscape({
       container: document.getElementById('malla'),
-      elements: [{
-        data: {
-          id: 'a',
-          name: 'Sistemas'
-        }
-      }, {
-        data: {
-          id: 'b',
-          name: 'Operativos'
-        }
-      }, {
-        data: {
-          id: 'ab',
-          source: 'a',
-          target: 'b'
-        }
-      }
-      ], style: [{
+      style: [{
         selector: 'edge',
         style: {
           width: 2,
@@ -65,6 +48,7 @@ export class CoursesComponent implements OnInit {
         }
       }]
     });
+
     this.malla.layout({
       name: 'random'
     }).run();
@@ -72,17 +56,46 @@ export class CoursesComponent implements OnInit {
   }
 
 
-  getCourses() {
+  /*getCourses() {
     this.dataService.getCourses().subscribe((courses) => {
 
     });
-  }
+  }*/
 
   getProduct() {
     this.dataService.getCourses()
       .subscribe(
         res => {
           this.courses = res;
+
+          //adding nodes
+          this.courses.forEach(course => {
+            this.malla.add({
+              group: 'nodes',
+              data: {
+                id: course.idCourse,
+                name: course.name
+              }
+            });
+
+            if (course.idPrerequisite) {
+              if (course.idPrerequisite[0] != "") {
+                course.idPrerequisite.forEach(prerequisite => {
+                  this.malla.add({
+                    group: 'edges',
+                    data: {
+                      id: prerequisite + "-" + course.idCourse,
+                      source: prerequisite,
+                      target: course.idCourse
+                    }
+                  })
+                });
+              }
+            }
+          })
+
+
+
         },
         err => console.log(err)
       );
