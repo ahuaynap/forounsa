@@ -41,32 +41,24 @@ export class CoursesComponent implements OnInit {
           'border-color': 'green',
           'border-width': '1px',
           'background-color': 'white',
+          'font-size': 9,
           content: 'data(name)',
           'text-wrap': 'wrap',
+          'text-max-width': 100,
           'text-valign': 'center',
           'text-halign': 'center',
         }
       }]
     });
 
-    this.malla.layout({
-      name: 'random'
-    }).run();
-
   }
-
-
-  /*getCourses() {
-    this.dataService.getCourses().subscribe((courses) => {
-
-    });
-  }*/
 
   getProduct() {
     this.dataService.getCourses()
       .subscribe(
         res => {
           this.courses = res;
+          var nCourses = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
           //adding nodes
           this.courses.forEach(course => {
@@ -75,9 +67,17 @@ export class CoursesComponent implements OnInit {
               data: {
                 id: course.idCourse,
                 name: course.name
-              }
+              }/*, position: {
+                x: 200 * (course.semester - 1) + 40,
+                y: nCourses[course.semester - 1] * 77 + 40
+              }*/
             });
+            nCourses[course.semester - 1]++;
 
+          });
+
+          //adding edges
+          this.courses.forEach(course => {
             if (course.idPrerequisite) {
               if (course.idPrerequisite[0] != "") {
                 course.idPrerequisite.forEach(prerequisite => {
@@ -94,11 +94,14 @@ export class CoursesComponent implements OnInit {
             }
           })
 
-
-
+          this.malla.layout({
+            name: 'breadthfirst'
+          }).run();
         },
         err => console.log(err)
       );
+
+
   }
 
 
