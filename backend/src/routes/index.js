@@ -23,6 +23,7 @@ module.exports = app => {
     router.put('/course/:id', course.update);
     router.delete('/course/:id', course.delete);
 
+    router.get('/post', post.list);
     router.get('/post/course/:course_id', post.course);
     router.get('/post/subscription/:user_id', post.subscription);
     router.get('/post/user/:user_id', post.user);

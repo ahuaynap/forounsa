@@ -2,6 +2,15 @@ const { Post, Course, User } = require('../models');
 
 const ctrl = {}
 
+ctrl.list = async(req, res) =>{
+    const posts = await Post.find();
+    if(posts){
+        res.json(posts);
+    }
+    else {
+        res.json('error');
+    }
+}
 ctrl.course = async(req, res) =>{
     const course = await Course.findById(req.params.course_id);
     if( course ){
@@ -38,18 +47,27 @@ ctrl.view = async(req, res) =>{
         await post.save(); 
         res.json(post);    
     }
+    else {
+        res.json({message: 'No existe este post'});
+    }
 }
 
 ctrl.create = async(req, res) =>{
-    const course = await Course.findById(req.params.id_career);
-    const newPost = new Post({
-        name: req.body.name,
-        description: req.body.description,
-        fileUrl: req.body.fileUrl,
-    })
-    newPost.idCourse = course._id;
-    await newPost.save();
-    res.json(newPost);
+    const course = await Course.findById(req.params.id_course);
+    if (course) {
+        const newPost = new Post({
+            name: req.body.name,
+            description: req.body.description,
+            idUser: req.body.idUser,
+            fileUrl: req.body.fileUrl
+        })
+        newPost.idCourse = req.params.id_course;
+        await newPost.save();
+        res.json(newPost);
+    }
+    else {
+        res.json('error');
+    }
 }
 
 ctrl.update = async(req, res) =>{

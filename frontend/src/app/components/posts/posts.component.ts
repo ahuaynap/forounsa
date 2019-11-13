@@ -29,7 +29,7 @@ export class PostsComponent implements OnInit {
         this.dataService.getUser(auth.email).subscribe(
           res => {
             this.currentUser = res;
-            this.getPosts(this.currentUser.id);
+            this.getPosts(this.currentUser._id);
           }
         );
       }
