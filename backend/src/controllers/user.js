@@ -14,6 +14,15 @@ ctrl.view = async(req, res) =>{
         res.json({error:'error'});
     }
 }
+ctrl.viewById = async(req, res) =>{
+    const user = await User.findById(req.params.id);
+    if( user ) {
+        res.json(user);
+    }
+    else{
+        res.json({error:'error'});
+    }
+}
 ctrl.create = async(req, res) =>{
     const user = new User({
         name: req.body.name,

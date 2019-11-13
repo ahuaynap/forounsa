@@ -3,13 +3,18 @@
         <div class="card text-white bg-secondary mb-3">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-8">
                         Código del curso: {{course.idCourse}}
                     </div>
-                    <div class="col-3">
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalScrollable">
-                            Agregar una publicación
-                        </button>
+                    <div class="col-4">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalPost">
+                                Agregar una publicación
+                            </button>
+                            <button type="button" class="btn btn-light">
+                                Suscribirse
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -23,61 +28,60 @@
         </div>
     </div>
     <div class="col-12">
-        {{file}}
-        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Agregar publicación</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form #postForm="ngForm" (ngSubmit)="onSubmit(postForm)">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input
-                            type="text" 
-                            class="form-control" 
-                            name="name" 
-                            #name="ngModel" 
-                            [(ngModel)]="newPost.name"
-                            placeholder="Titulo de la publicación"
-                            required>
-                        </div>
-                        <div class="form-group">
-                            <input
-                            type="text" 
-                            class="form-control" 
-                            name="description" 
-                            #description="ngModel" 
-                            [(ngModel)]="newPost.description"
-                            placeholder="Descripción de la publicación"
-                            required>
-                        </div>
-                        <div class="form-group">
-                            <input type="file" (change)="onUpload($event)">
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped bg-success"
-                              role="progressbar" [style.width]="(uploadPercent | async) +'%'">
-                            </div>
-                        </div>
-                        <input type="hidden" [value]="urlImage | async">
-                    
-                     </div>
-                    <div class="modal-footer">
+        <div id="modalPost" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalScrollableTitle">Agregar publicación</h5>
+                        <button type="button" class="close" #close data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form class="form-post" #postForm="ngForm" (ngSubmit)="onSubmit(postForm)">
+                        <div class="modal-body">
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit">
+                                <input
+                                type="text" 
+                                class="form-control" 
+                                name="name" 
+                                #name="ngModel" 
+                                [(ngModel)]="newPost.name"
+                                placeholder="Titulo de la publicación"
+                                required>
+                            </div>
+                            <div class="form-group">
+                                <input
+                                type="text" 
+                                class="form-control" 
+                                name="description" 
+                                #description="ngModel" 
+                                [(ngModel)]="newPost.description"
+                                placeholder="Descripción de la publicación"
+                                required>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" (change)="onUpload($event)">
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-success"
+                                role="progressbar" [style.width]="(uploadPercent | async) +'%'">
+                                </div>
+                            </div>
+                            <input type="hidden" [value]="urlImage | async">
+                        
+                        </div>
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary float-right" (click)="resetForm(productForm);close.click()">
                                     <i class="fa fa-plus-circle"></i> Publicar
                                 </button>
-                                <button class="btn btn-secondary" type="reset" (click)="resetForm(productForm)">
+                                <button class="btn btn-secondary" type="reset" (click)="resetForm(productForm);close.click()">
                                     <i class="fas fa-sync-alt"></i> Cancelar
                                 </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
             </div>
         </div>
         
@@ -87,7 +91,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-10">
-                        {{post.idUser}}
+                        {{post.userName}}
                     </div>
                     <div class="col-2">
                         <small class="text-muted">{{post.timestamp}}</small>

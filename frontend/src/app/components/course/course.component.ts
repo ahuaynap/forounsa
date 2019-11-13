@@ -22,12 +22,12 @@ export class CourseComponent implements OnInit {
 
   private id: string;
   private course: Course = {
-    description: '', name: '', likes: 0, idCareer: '', prerequisites : [], state: '', views: 0
+    description: '', name: '', likes: 0, idCareer: '', idPrerequisite: [] , state: '', views: 0, credit: 0, idCourse: '', semester: 0,
   };
   private currentUser: User;
   private posts: Post[];
   private newPost: Post = {
-    name: '', description: '',
+    name: '', description: ''
   };
   private file = null;
   private filePath = null;
@@ -66,7 +66,6 @@ export class CourseComponent implements OnInit {
     this.dataService.getPostsCourse(this.id).subscribe(
       res => {
         this.posts = res;
-        console.log(this.posts);
       }
     );
   }
@@ -84,24 +83,23 @@ export class CourseComponent implements OnInit {
 
   onSubmit(postForm: NgForm) {
     this.newPost.idUser = this.currentUser._id;
+    this.newPost.userName = this.currentUser.name;
     if (this.urlImage) {
       this.urlImage.subscribe(
         res => this.newPost.fileUrl = res
       );
     }
-    console.log(this.newPost);
-    /*this.dataService.addPost(this.newPost, this.course._id).subscribe(
+    this.dataService.addPost(this.newPost, this.course._id).subscribe(
       res => console.log(res),
       err => console.log(err)
-    );*/
+    );
+    this.resetForm(postForm);
     this.getPosts();
   }
 
   resetForm(postForm: NgForm) {
     if (postForm != null) {
       postForm.reset();
-      this.newPost.name = '';
-      this.newPost.description = '';
       this.file = null;
       this.filePath = null;
     }

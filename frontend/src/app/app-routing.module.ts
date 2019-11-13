@@ -7,31 +7,37 @@ import { CourseComponent } from './components/course/course.component';
 import { Page404Component } from './components/page404/page404.component';
 import { PostComponent } from './components/post/post.component';
 import { PostsComponent } from './components/posts/posts.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'courses',
-    component: CoursesComponent
+    component: CoursesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'course/:id',
-    component: CourseComponent
+    component: CourseComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'post/:id',
-    component: PostComponent
+    component: PostComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'posts',
-    component: PostsComponent
+    component: PostsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

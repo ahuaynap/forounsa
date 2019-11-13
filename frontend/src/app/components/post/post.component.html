@@ -1,51 +1,100 @@
 <div class="row">
-        <div class="col-12 mt-5">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-10">
-                            Featured
-                        </div>
-                        <div class="col-2 text-muted">
-                            2 days ago
-                        </div>
+    <div class="col-12 mt-5">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-9">
+                        {{post.userName}}
                     </div>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div class="card-footer text-muted">
-                    <div class="row">
-                        <div class="col-10">
-                            <button class="btn btn-success"><i class="fa fa-heart"></i> Me gusta</button>
-                        </div>
-                        <div class="col-1">
-                            2 <a><i class="fa fa-heart"></i></a>
-                        </div>
-                        <div class="col-1">
-                            10 <a><i class="fa fa-eye"></i></a>
-                        </div>
+                    <div class="col-3 text-muted">
+                        {{post.timestamp}}
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-2">
-                            Nombre
-                        </div>
-                        <div class="col-8">
-                            Comentario
-                        </div>
-                        <div class="col-2">
-                            2 <a><i class="fa fa-heart"></i></a>
-                        </div>
+            <div class="card-body">
+                <h5 class="card-title">Titulo: {{post.name}}</h5>
+                <p class="card-text">Descripcion: {{post.description}}</p>
+            </div>
+            <div class="card-footer text-muted">
+                <div class="row">
+                    <div class="col-10">
+                        <button class="btn btn-success"><i class="fa fa-heart"></i> Me gusta</button>
+                    </div>
+                    <div class="col-1">
+                        {{post.likes}} 
+                        <a><i class="fa fa-heart"></i></a>
+                    </div>
+                    <div class="col-1">
+                        {{post.views}}
+                        <a><i class="fa fa-eye"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+    <div class="col-12">
+        <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalCommentLabel">Agregar comentario</h5>
+                        <button type="button" class="close" data-dismiss="modal" #close aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form class="form-comment" #commentForm="ngForm" (ngSubmit)="onSubmit(commentForm)">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input
+                                type="text" 
+                                class="form-control" 
+                                name="description"
+                                #description="ngModel" 
+                                [(ngModel)]="newComment.description"
+                                placeholder="Comentario"
+                                required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="reset" (click)="resetForm(commentForm);close.click()">
+                                <i class="fas fa-sync-alt"></i> Cancelar
+                            </button>
+                            <button type="submit" class="btn btn-primary">Publicar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-2">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-9">
+                        Commentarios
+                    </div>
+                    <div class="col-3">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalComment">
+                                Agregar un comentario
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <ul class="list-group p-4">     
+                    <li class="list-group-item" *ngFor="let comment of comments">
+                        <div class="row">
+                            <div class="col">
+                                {{comment.idUser}} :
+                            </div>
+                            <div class="col">
+                                {{comment.description}}
+                                <button type="button" class="close">x</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

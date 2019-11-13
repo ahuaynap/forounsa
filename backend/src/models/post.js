@@ -11,6 +11,10 @@ const PostSchema = new Schema({
     idUser: {
         type: ObjectId
     },
+    userName: {
+        type: String
+    }
+    ,
     name: {
         type: String
     },

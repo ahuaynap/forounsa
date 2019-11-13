@@ -43,7 +43,7 @@ ctrl.user = async(req, res) =>{
 ctrl.view = async(req, res) =>{
     const post = await Post.findById(req.params.id);
     if (post) {
-        post.views = post.views + 1;
+        //post.views = post.views + 1;
         await post.save(); 
         res.json(post);    
     }
@@ -59,7 +59,8 @@ ctrl.create = async(req, res) =>{
             name: req.body.name,
             description: req.body.description,
             idUser: req.body.idUser,
-            fileUrl: req.body.fileUrl
+            fileUrl: req.body.fileUrl,
+            userName: req.body.userName,
         })
         newPost.idCourse = req.params.id_course;
         await newPost.save();

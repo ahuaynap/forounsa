@@ -2,11 +2,11 @@
 export interface Course {
     _id?: string;
     name: string;
-    credit: number,
-    semester: number,
+    credit: number;
+    semester: number;
     description: string;
     idCareer: string;
-    idCourse: string,
+    idCourse: string;
     idPrerequisite: string[];
     views: number;
     likes: number;

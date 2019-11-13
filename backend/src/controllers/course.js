@@ -8,7 +8,15 @@ ctrl.index = async (req, res) => {
 }
 ctrl.view = async (req, res) => {
     const course = await Course.findById(req.params.id);
-    res.json(course);
+    if(course)
+    {
+        course.views = course.views + 1;
+        await course.save(); 
+        res.json(course);
+    }
+    else {
+        res.json('error');
+    }
 }
 ctrl.create = async (req, res) => {
     const career = await Career.findById(req.params.id_career);

@@ -1,10 +1,11 @@
 export interface Post {
-    id?: number;
+    _id?: string;
     name: string;
     description: string;
     idCourse?: string;
     idUser?: string;
     views?: number;
+    userName?: string;
     likes?: number;
     fileUrl?: string;
     timestamp?: Date;

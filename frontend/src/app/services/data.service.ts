@@ -74,6 +74,10 @@ export class DataService {
     return this.http.get<User>(`${this.BASE_URL}/user/${email}`);
   }
 
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(`${this.BASE_URL}/user/id/${id}`);
+  }
+
   addUser(user: User): Observable<User> {
     return this.http.post<User>(`${this.BASE_URL}/user`, user);
   }
