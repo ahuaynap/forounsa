@@ -58,7 +58,8 @@ export class CoursesComponent implements OnInit {
       .subscribe(
         res => {
           this.courses = res;
-          var nCourses = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+          var nCourses = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+          var nCoursesT = [7, 6, 8, 7, 6, 6, 7, 8, 9, 7];
 
           //adding nodes
           this.courses.forEach(course => {
@@ -66,11 +67,12 @@ export class CoursesComponent implements OnInit {
               group: 'nodes',
               data: {
                 id: course.idCourse,
-                name: course.name
-              }/*, position: {
-                x: 200 * (course.semester - 1) + 40,
-                y: nCourses[course.semester - 1] * 77 + 40
-              }*/
+                name: course.name,
+                href: "/course/" + course._id
+              }, position: {
+                x: nCourses[course.semester - 1] * (1100 / nCoursesT[course.semester - 1]) + ((10 - nCoursesT[course.semester - 1]) * 28),
+                y: 130 * (course.semester - 1) + 60
+              }
             });
             nCourses[course.semester - 1]++;
 
@@ -86,7 +88,7 @@ export class CoursesComponent implements OnInit {
                     data: {
                       id: prerequisite + "-" + course.idCourse,
                       source: prerequisite,
-                      target: course.idCourse
+                      target: course.idCourse,
                     }
                   })
                 });
@@ -94,9 +96,12 @@ export class CoursesComponent implements OnInit {
             }
           })
 
-          this.malla.layout({
-            name: 'breadthfirst'
-          }).run();
+          this.malla.on('tap', 'node', (evt) => {
+            var node = evt.target;
+            console.log(node.data().href);
+            window.location.href = node.data().href + '/';
+          });
+
         },
         err => console.log(err)
       );
