@@ -23,24 +23,7 @@ export class CoursesComponent implements OnInit {
     this.getProduct();
     this.malla = cytoscape({
       container: document.getElementById('malla'),
-      elements: [{
-        data: {
-          id: 'a',
-          name: 'Sistemas'
-        }
-      }, {
-        data: {
-          id: 'b',
-          name: 'Operativos'
-        }
-      }, {
-        data: {
-          id: 'ab',
-          source: 'a',
-          target: 'b'
-        }
-      }
-      ], style: [{
+      style: [{
         selector: 'edge',
         style: {
           width: 2,
@@ -58,24 +41,16 @@ export class CoursesComponent implements OnInit {
           'border-color': 'green',
           'border-width': '1px',
           'background-color': 'white',
+          'font-size': 9,
           content: 'data(name)',
           'text-wrap': 'wrap',
+          'text-max-width': 100,
           'text-valign': 'center',
           'text-halign': 'center',
         }
       }]
     });
-    this.malla.layout({
-      name: 'random'
-    }).run();
 
-  }
-
-
-  getCourses() {
-    this.dataService.getCourses().subscribe((courses) => {
-
-    });
   }
 
   getProduct() {
@@ -83,9 +58,50 @@ export class CoursesComponent implements OnInit {
       .subscribe(
         res => {
           this.courses = res;
+          var nCourses = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+          //adding nodes
+          this.courses.forEach(course => {
+            this.malla.add({
+              group: 'nodes',
+              data: {
+                id: course.idCourse,
+                name: course.name
+              }/*, position: {
+                x: 200 * (course.semester - 1) + 40,
+                y: nCourses[course.semester - 1] * 77 + 40
+              }*/
+            });
+            nCourses[course.semester - 1]++;
+
+          });
+
+          //adding edges
+          this.courses.forEach(course => {
+            if (course.idPrerequisite) {
+              if (course.idPrerequisite[0] != "") {
+                course.idPrerequisite.forEach(prerequisite => {
+                  this.malla.add({
+                    group: 'edges',
+                    data: {
+                      id: prerequisite + "-" + course.idCourse,
+                      source: prerequisite,
+                      target: course.idCourse
+                    }
+                  })
+                });
+              }
+            }
+          })
+
+          this.malla.layout({
+            name: 'breadthfirst'
+          }).run();
         },
         err => console.log(err)
       );
+
+
   }
 
 
