@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { User } from 'src/app/interfaces/user.interface';
+import { Post } from 'src/app/interfaces/post.interface';
 
 @Component({
   selector: 'app-home',
@@ -18,24 +19,27 @@ export class HomeComponent implements OnInit {
     email: '',
     subscription: [],
   };
+  private posts: Post[];
 
   ngOnInit() {
     this.getCurrentUser();
   }
   getCurrentUser() {
     this.authService.isAuth().subscribe( auth => {
-      if (auth) {
         this.dataService.getUser(auth.email).subscribe(
           res => {
-            this.currentUser.name = res.name;
-            this.currentUser.email = res.email;
-            this.currentUser.subscription = res.subscription;
+            this.currentUser = res;
+            this.getPostSubscription(this.currentUser._id);
           }
         );
-      } else {
-        this.router.navigate(['/login']);
-      }
     });
   }
+  getPostSubscription(id: string) {
+    this.dataService.getPostsSubscription(id).subscribe(
+      res => { this.posts = res; console.log(this.posts); },
+      err => console.log(err)
+    );
+  }
+
 
 }

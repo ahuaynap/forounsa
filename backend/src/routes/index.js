@@ -32,6 +32,7 @@ module.exports = app => {
     router.put('/post/:id', post.update);
     router.delete('/post/:id', post.delete);
 
+    router.get('/comment', comment.allComments);
     router.get('/comment/:post_id', comment.index);
     router.post('/comment/:post_id/:user_id', comment.create);
     router.put('/comment/:id', comment.update);

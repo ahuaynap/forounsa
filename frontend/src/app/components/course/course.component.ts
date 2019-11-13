@@ -75,6 +75,7 @@ export class CourseComponent implements OnInit {
         this.dataService.getUser(auth.email).subscribe(
           res => {
             this.currentUser = res;
+            console.log(this.currentUser);
             return true;
           }
         );
@@ -103,6 +104,12 @@ export class CourseComponent implements OnInit {
       this.file = null;
       this.filePath = null;
     }
+  }
+
+  subscribeCourse() {
+    this.dataService.addSubscription(this.currentUser._id, this.id).subscribe(
+      res => console.log(res)
+    );
   }
 
 }

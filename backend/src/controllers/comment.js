@@ -1,6 +1,11 @@
 const { Comment, Post, User } = require('../models');
 const ctrl = {}
 
+ctrl.allComments = async(req, res) =>{
+    const comments = await Comment.find();
+    res.json(comments);
+}
+
 ctrl.index = async(req, res) =>{
     const post = await Post.findById(req.params.post_id);
     if ( post ) {
@@ -15,6 +20,7 @@ ctrl.create = async(req, res) =>{
     if( post && user ){
         const newComment = new Comment({
             description: req.body.description,
+            userName: req.body.userName
         })
         newComment.idUser = user._id;
         newComment.idPost = post._id;

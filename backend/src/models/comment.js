@@ -6,6 +6,7 @@ const CommentSchema = new Schema({
     description: { type: String },
     idPost: { type: ObjectId },
     idUser: { type: ObjectId },
+    userName: { type: String },
     likes: { type: Number, default: 0 },
     fileUrl: { type: String },
     timestamp: { type: Date, default: Date.now },

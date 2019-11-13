@@ -61,6 +61,7 @@ export class PostComponent implements OnInit {
   }
 
   onSubmit(commentForm: NgForm) {
+    this.newComment.userName = this.currentUser.name;
     this.dataService.addComment(this.newComment, this.id, this.currentUser._id).subscribe(
       res => console.log(res),
       error => console.log(error)
@@ -75,6 +76,8 @@ export class PostComponent implements OnInit {
     }
   }
 
-
+  makeLike() {
+    console.log('ok');
+  }
 
 }

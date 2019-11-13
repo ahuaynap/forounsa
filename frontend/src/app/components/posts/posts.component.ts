@@ -12,36 +12,30 @@ import { Post } from 'src/app/interfaces/post.interface';
 export class PostsComponent implements OnInit {
 
   constructor(private dataService: DataService, private authService: AuthService) { }
-
   private currentUser: User = {
+    name: '',
     email: '',
-    name: ''
+    subscription: [],
   };
-
   private posts: Post[];
 
   ngOnInit() {
+    this.getCurrentUser();
   }
-
   getCurrentUser() {
     this.authService.isAuth().subscribe( auth => {
-      if (auth) {
         this.dataService.getUser(auth.email).subscribe(
           res => {
             this.currentUser = res;
             this.getPosts(this.currentUser._id);
           }
         );
-      }
     });
   }
-
-  getPosts(currentUserId) {
-    this.dataService.getPostsUser(currentUserId).subscribe(
-      res => {
-        this.posts = res;
-      }
+  getPosts(id: string) {
+    this.dataService.getPostsUser(id).subscribe(
+      res => { this.posts = res; console.log(this.posts); },
+      err => console.log(err)
     );
   }
-
 }

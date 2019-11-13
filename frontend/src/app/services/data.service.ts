@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { Course } from '../interfaces/course.interface';
 import { Post } from '../interfaces/post.interface';
 import { Comment } from '../interfaces/comment.interface';
@@ -31,11 +31,11 @@ export class DataService {
   }
 
   getPostsUser(idUser: string): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.BASE_URL}/post/course/${idUser}`);
+    return this.http.get<Post[]>(`${this.BASE_URL}/post/user/${idUser}`);
   }
 
   getPostsSubscription(idUser: string): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.BASE_URL}/post/course/${idUser}`);
+    return this.http.get<Post[]>(`${this.BASE_URL}/post/subscription/${idUser}`);
   }
 
   getPost(id: string): Observable<Post> {

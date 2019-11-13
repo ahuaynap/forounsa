@@ -3,6 +3,7 @@ export interface Comment {
     description: string;
     idPost?: string;
     idUser?: string;
+    userName?: string;
     likes?: number;
     fileUrl?: string;
     timestamp?: Date;

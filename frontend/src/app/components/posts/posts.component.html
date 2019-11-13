@@ -1,24 +1,26 @@
 <div class="row">
-    <div class="col mt-5">
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-10">
-                        Featured
-                    </div>
-                    <div class="col-2">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+    <div class="col">
+        <div class="col-12">
+            <div class="card mt-5" *ngFor="let post of posts">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-10">
+                            {{post.userName}}
+                        </div>
+                        <div class="col-2">
+                            <small class="text-muted">{{post.timestamp}}</small>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                
-            </div>
-            <div class="card-footer">
-                <div class="text-center">
-                    <a routerLink="/post/1" class="btn btn-secondary">Go somewhere</a>
+                <div class="card-body">
+                    <h5 class="card-title"> {{post.name}} </h5>
+                    <p class="card-text">{{post.description}}</p>
+                    <p class="card-text">{{post.fileUrl}}</p>
+                </div>
+                <div class="card-footer">
+                    <div class="text-center">
+                        <a routerLink="/post/{{post._id}}" class="btn btn-secondary">Ir a la publicación</a>
+                    </div>
                 </div>
             </div>
         </div>

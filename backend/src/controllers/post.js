@@ -27,7 +27,7 @@ ctrl.subscription = async(req, res) =>{
     }
     let posts = [];
     for (let i = 0; i < courses.length; i++) {
-        posts.push(await Post.find());
+        posts.push(await Post.find({idCourse:courses[i]._id}));
     }
     res.json(posts);
 }

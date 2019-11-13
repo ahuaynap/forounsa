@@ -18,7 +18,7 @@
             <div class="card-footer text-muted">
                 <div class="row">
                     <div class="col-10">
-                        <button class="btn btn-success"><i class="fa fa-heart"></i> Me gusta</button>
+                        <button class="btn btn-success" (click)="makeLike()"><i class="fa fa-heart"></i> Me gusta</button>
                     </div>
                     <div class="col-1">
                         {{post.likes}} 
@@ -59,7 +59,7 @@
                             <button class="btn btn-secondary" type="reset" (click)="resetForm(commentForm);close.click()">
                                 <i class="fas fa-sync-alt"></i> Cancelar
                             </button>
-                            <button type="submit" class="btn btn-primary">Publicar</button>
+                            <button type="submit" class="btn btn-primary" (click)="close.click()">Publicar</button>
                         </div>
                     </form>
                 </div>
@@ -85,11 +85,10 @@
                     <li class="list-group-item" *ngFor="let comment of comments">
                         <div class="row">
                             <div class="col">
-                                {{comment.idUser}} :
+                                {{comment.userName}} :
                             </div>
                             <div class="col">
                                 {{comment.description}}
-                                <button type="button" class="close">x</button>
                             </div>
                         </div>
                     </li>
