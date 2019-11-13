@@ -34,7 +34,7 @@ export class PostsComponent implements OnInit {
   }
   getPosts(id: string) {
     this.dataService.getPostsUser(id).subscribe(
-      res => { this.posts = res; console.log(this.posts); },
+      res => { this.posts = res; },
       err => console.log(err)
     );
   }

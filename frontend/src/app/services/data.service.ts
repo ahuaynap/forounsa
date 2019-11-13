@@ -98,20 +98,20 @@ export class DataService {
     return this.http.get<Notification>(`${this.BASE_URL}/notification/comment/${idUser}/${idPost}`);
   }
 
-  getLikePost(idPost, idUser): Observable<Like> {
+  getLikePost(idUser, idPost): Observable<Like> {
     return this.http.get<Like>(`${this.BASE_URL}/like/post/${idUser}/${idPost}`);
   }
 
-  getLikeComment(idPost, idUser): Observable<Like> {
+  getLikeComment(idUser, idPost): Observable<Like> {
     return this.http.get<Like>(`${this.BASE_URL}/like/comment/${idUser}/${idPost}`);
   }
 
-  makeLikePost(idPost, idUser): Observable<Like> {
-    return this.http.post<Like>(`${this.BASE_URL}/like/post/${idUser}/${idPost}`, {});
+  makeLikePost(idUser, idPost): Observable<Like> {
+    return this.http.get<Like>(`${this.BASE_URL}/like/post/make/${idUser}/${idPost}`);
   }
 
-  makeLikeComment(idPost, idUser): Observable<Like> {
-    return this.http.post<Like>(`${this.BASE_URL}/like/comment/${idUser}/${idPost}`, {});
+  makeLikeComment(idUser, idPost): Observable<Like> {
+    return this.http.get<Like>(`${this.BASE_URL}/like/comment/make/${idUser}/${idPost}`);
   }
 
 }

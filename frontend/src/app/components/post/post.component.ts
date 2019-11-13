@@ -18,8 +18,11 @@ export class PostComponent implements OnInit {
   constructor(private dataService: DataService, private authService: AuthService, private route: ActivatedRoute) { }
 
   private id = '';
-  private currentUser: User;
-  private currentLike: Like;
+  private currentUser: User = {
+    email: '',
+    name: ''
+  };
+  private currentLike = false;
   private comments: Comment[];
   private newComment: Comment = {
     description: ''
@@ -34,13 +37,16 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getPost();
-    this.getCurrentUser();
     this.getComments();
   }
 
   getPost() {
     this.dataService.getPost(this.id).subscribe(
-      res => this.post = res
+      res => {
+        this.post = res;
+        this.id = this.post._id;
+        this.getCurrentUser();
+      }
     );
   }
 
@@ -55,9 +61,27 @@ export class PostComponent implements OnInit {
         this.dataService.getUser(auth.email).subscribe(
           res => {
             this.currentUser = res;
+            this.getCurrentLike(this.currentUser._id);
           }
         );
     });
+  }
+
+  getCurrentLike(idUser) {
+    console.log(idUser);
+    this.dataService.getLikePost(idUser, this.id).subscribe(
+      res => this.currentLike = res.state,
+      error => console.log(error)
+    );
+  }
+
+  makeLike() {
+    this.dataService.makeLikePost(this.currentUser._id, this.id).subscribe(
+      res => {
+        this.currentLike = res.state;
+        console.log(this.currentLike);
+      }
+    );
   }
 
   onSubmit(commentForm: NgForm) {
@@ -74,10 +98,6 @@ export class PostComponent implements OnInit {
     if (commentForm != null) {
       commentForm.reset();
     }
-  }
-
-  makeLike() {
-    console.log('ok');
   }
 
 }

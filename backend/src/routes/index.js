@@ -52,10 +52,10 @@ module.exports = app => {
     router.put('/notification/:id', notification.update);
     router.delete('/notification/:id', notification.delete);
 
-    router.get('/like/post/:post_id/:user_id', like.post);
-    router.post('/like/post/:post_id/:user_id', like.postchange);
-    router.get('/like/comment/:comment_id/:user_id', like.comment);
-    router.post('/like/comment/:post_id/:user_id', like.commentchange);
+    router.get('/like/post/:user_id/:post_id', like.post);
+    router.get('/like/post/make/:user_id/:post_id', like.postchange);
+    router.get('/like/comment/:user_id/:comment_id', like.comment);
+    router.get('/like/comment/make/:user_id/:comment_id', like.commentchange);
 
     app.use(router);
 }
