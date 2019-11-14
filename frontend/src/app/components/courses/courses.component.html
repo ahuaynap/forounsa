@@ -7,16 +7,18 @@
           <th scope="col">id</th>
           <th scope="col">Curso</th>
           <th scope="col">Vistas</th>
-          <th scope="col">Likes</th>
+          <th scope="col">Semestre</th>
+          <th scope="col">Creditos</th>
           <th scope="col">Opciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let course of courses">
-          <th scope="row">{{course._id}}</th>
+          <th scope="row">{{course.idCourse}}</th>
           <td>{{course.name}}</td>
           <td>{{course.views}}</td>
-          <td>{{course.likes}}</td>
+          <td>{{course.semester}}</td>
+          <td>{{course.credit}}</td>
           <td><a routerLink="/course/{{course._id}}" class="btn btn-secondary btn-sm">Ir al curso</a></td>
         </tr>
       </tbody>

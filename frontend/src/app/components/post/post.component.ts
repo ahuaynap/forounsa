@@ -79,7 +79,7 @@ export class PostComponent implements OnInit {
     this.dataService.makeLikePost(this.currentUser._id, this.id).subscribe(
       res => {
         this.currentLike = res.state;
-        console.log(this.currentLike);
+        this.getPost();
       }
     );
   }
@@ -87,11 +87,10 @@ export class PostComponent implements OnInit {
   onSubmit(commentForm: NgForm) {
     this.newComment.userName = this.currentUser.name;
     this.dataService.addComment(this.newComment, this.id, this.currentUser._id).subscribe(
-      res => console.log(res),
+      res => this.getComments(),
       error => console.log(error)
     );
     this.resetForm(commentForm);
-    this.getComments();
   }
 
   resetForm(commentForm: NgForm) {

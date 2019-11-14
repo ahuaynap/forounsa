@@ -27,10 +27,14 @@ ctrl.postchange = async(req, res) =>{
     const post = await Post.findById(req.params.post_id);
     if(user && post){
         const like = await Like.findOne({idUser:user._id,idEntity:post._id});
-        like.state = !like.state;
-        if(like.state){
-            post.like = post.like +1;
+        if(!like.state){
+            post.likes = post.likes + 1;
         }
+        else {
+            post.likes = post.likes - 1;
+        }
+        like.state = !like.state;
+        post.views = post.views - 1;
         await post.save();
         await like.save();
         res.json(like);

@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     email: '',
     subscription: [],
   };
-  private posts: Post[];
+  private subs: Post[];
 
   ngOnInit() {
     this.getCurrentUser();
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   }
   getPostSubscription(id: string) {
     this.dataService.getPostsSubscription(id).subscribe(
-      res => { this.posts = res; console.log(this.posts); },
+      res => { this.subs = res; console.log(this.subs); },
       err => console.log(err)
     );
   }
