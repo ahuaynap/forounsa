@@ -20,6 +20,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CareersComponent } from './components/careers/careers.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     Page404Component,
     CourseComponent,
     PostsComponent,
-    PostComponent
+    PostComponent,
+    DashboardComponent,
+    CareersComponent
   ],
   imports: [
     BrowserModule,
