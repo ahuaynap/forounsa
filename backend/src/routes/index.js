@@ -55,7 +55,6 @@ module.exports = app => {
     router.get('/like/post/:user_id/:post_id', like.post);
     router.get('/like/post/make/:user_id/:post_id', like.postchange);
     router.get('/like/comment/:user_id/:comment_id', like.comment);
-    router.get('/like/comment/make/:user_id/:comment_id', like.commentchange);
 
     app.use(router);
 }

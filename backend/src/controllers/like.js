@@ -48,27 +48,21 @@ ctrl.comment = async(req, res) =>{
     const comment = await Comment.findById(req.params.comment_id);
     if(user && comment){
         const like = await Like.findOne({idUser:user._id,idEntity:comment._id});
-        if( like ){
-            res.json(like);
+        if (like) {
+            comment.likes = comment.likes - 1;
+            await Like.findByIdAndDelete(like._id);
+            await comment.save();
+            res.json({message:'dislike'});
+        } else {
+            const newlike = new Like({
+                idUser: user._id,
+                idEntity: post._id
+            });
+            comment.likes = comment.likes - 1;
+            newlike.save();
+            await comment.save();
+            res.json(newlike);
         }
-        else{
-            const newLike = new Like({});
-            newLike.idUser = user._id;
-            newLike.idComment = comment._id;
-            await newLike.save();
-            res.json(newLike);
-        }
-    }
-}
-
-ctrl.commentchange = async(req, res) =>{
-    const user = await User.findById(req.params.user_id);
-    const comment = await Comment.findById(req.params.comment_id);
-    if(user && comment){
-        const like = await Like.findOne({idUser:user._id,idEntity:comment._id});
-        like.state = !like.state;
-        await like.save();
-        res.json(like);
     }
 }
 
