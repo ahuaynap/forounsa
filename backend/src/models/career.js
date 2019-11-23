@@ -4,6 +4,10 @@ const {
 } = mongoose;
 
 const CareerSchema = new Schema({
+
+    code: {
+        type: String
+    },
     name: {
         type: String
     },

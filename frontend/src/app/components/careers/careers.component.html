@@ -1,0 +1,45 @@
+<br>
+
+<div class="row">
+  <div class="col-10">
+    <h2>Careers</h2>
+  </div>
+  <div class="col">
+    <button class="btn btn-dark btn-lg">Add Career</button>
+  </div>
+</div>
+
+<br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Code</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let career of careers; index as i">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{career.code}}</td>
+      <td>{{career.name}}</td>
+      <td>{{career.description}}</td>
+      <td>
+        <div class="row">
+          <div class="col-5">
+            <a class="btn btn-dark btn-block" routerLink="/career/{{career.id}}">Add Course</a>
+          </div>
+          <div class="col-3">
+            <a class="btn btn-dark btn-block" routerLink="/career/{{career.id}}">Edit</a>
+          </div>
+          <div class="col-4">
+            <a class="btn btn-dark btn-block" routerLink="/career/{{career.id}}">Delete</a>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -7,6 +7,7 @@ import { Comment } from '../interfaces/comment.interface';
 import { User } from '../interfaces/user.interface';
 import { Notification } from '../interfaces/notification.interface';
 import { Like } from '../interfaces/like.interface';
+import { Career } from '../interfaces/career.interface';
 
 
 @Injectable({
@@ -17,6 +18,14 @@ export class DataService {
   BASE_URL = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
+
+  getCareers(): Observable<Career[]> {
+    return this.http.get<Career[]>(`${this.BASE_URL}/career`);
+  }
+
+  getCareer(id: string): Observable<Career> {
+    return this.http.get<Career>(`${this.BASE_URL}/career/${id}`);
+  }
 
   getCourses(): Observable<Course[]> {
     return this.http.get<Course[]>(`${this.BASE_URL}/course`);
@@ -42,12 +51,24 @@ export class DataService {
     return this.http.get<Post>(`${this.BASE_URL}/post/${id}`);
   }
 
+  addCareer(career: Career): Observable<Career> {
+    return this.http.post<Career>(`${this.BASE_URL}/career`, career);
+  }
+
   addPost(post: Post, idCourse: string): Observable<Post> {
     return this.http.post<Post>(`${this.BASE_URL}/post/${idCourse}`, post);
   }
 
+  updateCareer(id: string, career: Career): Observable<Career> {
+    return this.http.put<Career>(`${this.BASE_URL}/career/${id}`, career);
+  }
+
   updatePost(id: string, post: Post): Observable<Post> {
     return this.http.put<Post>(`${this.BASE_URL}/post/${id}`, post);
+  }
+
+  deleteCareer(id: string): Observable<Career> {
+    return this.http.delete<Career>(`${this.BASE_URL}/career/${id}`);
   }
 
   deletePost(id: string): Observable<Post> {
@@ -82,6 +103,10 @@ export class DataService {
     return this.http.post<User>(`${this.BASE_URL}/user`, user);
   }
 
+  addCourse(idCareer: string, course: Course): Observable<Course> {
+    return this.http.post<Course>(`${this.BASE_URL}/course/${idCareer}`, course);
+  }
+
   addSubscription(idUser: string, idCourse: string): Observable<User> {
     return this.http.get<User>(`${this.BASE_URL}/user/subscription/${idUser}/${idCourse}`);
   }
@@ -96,6 +121,14 @@ export class DataService {
 
   addNotificationComment(idUser: string, idPost: string): Observable<Notification> {
     return this.http.get<Notification>(`${this.BASE_URL}/notification/comment/${idUser}/${idPost}`);
+  }
+
+  deleteCourse(id: string): Observable<Course> {
+    return this.http.delete<Course>(`${this.BASE_URL}/course/${id}`);
+  }
+
+  updateCourse(id: string, course: Course): Observable<Course> {
+    return this.http.put<Course>(`${this.BASE_URL}/course/${id}`, course);
   }
 
   getLikePost(idUser, idPost): Observable<Like> {
@@ -113,5 +146,6 @@ export class DataService {
   makeLikeComment(idUser, idPost): Observable<Like> {
     return this.http.get<Like>(`${this.BASE_URL}/like/comment/make/${idUser}/${idPost}`);
   }
+
 
 }
