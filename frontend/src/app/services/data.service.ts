@@ -19,6 +19,10 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  getTop(): Observable<Object> {
+    return this.http.get<Object>(`${this.BASE_URL}/topTen`);
+  }
+
   getCareers(): Observable<Career[]> {
     return this.http.get<Career[]>(`${this.BASE_URL}/career`);
   }

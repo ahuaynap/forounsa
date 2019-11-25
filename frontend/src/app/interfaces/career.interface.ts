@@ -1,6 +1,7 @@
 
 export interface Career {
-    id?: number;
+    id?: string;
+    _id: string;
     code: string;
     name: string;
     description: string;

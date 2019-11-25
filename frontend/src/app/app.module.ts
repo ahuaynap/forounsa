@@ -11,7 +11,7 @@ import { Page404Component } from './components/page404/page404.component';
 import { CourseComponent } from './components/course/course.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostComponent } from './components/post/post.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 
 import { AngularFireModule } from '@angular/fire';
@@ -22,6 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CareersComponent } from './components/careers/careers.component';
+
+import { ChartsModule } from 'ng2-charts';
+import { ChartsComponent } from './components/charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { CareersComponent } from './components/careers/careers.component';
     PostsComponent,
     PostComponent,
     DashboardComponent,
-    CareersComponent
+    CareersComponent,
+    ChartsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,9 @@ import { CareersComponent } from './components/careers/careers.component';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [
     AngularFireAuth
