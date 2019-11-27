@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CareersComponent } from './components/careers/careers.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CareersComponent } from './components/careers/careers.component';
     PostsComponent,
     PostComponent,
     DashboardComponent,
-    CareersComponent
+    CareersComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

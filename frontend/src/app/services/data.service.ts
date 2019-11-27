@@ -110,6 +110,9 @@ export class DataService {
   addSubscription(idUser: string, idCourse: string): Observable<User> {
     return this.http.get<User>(`${this.BASE_URL}/user/subscription/${idUser}/${idCourse}`);
   }
+  cancelSubscription(idUser: string, idCourse: string): Observable<User> {
+    return this.http.get<User>(`${this.BASE_URL}/user/cancelSubscription/${idUser}/${idCourse}`);
+  }
 
   getNotifications(idUser: string): Observable<Notification[]> {
     return this.http.get<Notification[]>(`${this.BASE_URL}/notification/${idUser}`);
@@ -146,6 +149,4 @@ export class DataService {
   makeLikeComment(idUser, idPost): Observable<Like> {
     return this.http.get<Like>(`${this.BASE_URL}/like/comment/make/${idUser}/${idPost}`);
   }
-
-
 }

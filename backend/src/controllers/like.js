@@ -66,4 +66,12 @@ ctrl.comment = async(req, res) =>{
     }
 }
 
+ctrl.delete = async(req, res) =>{
+    const likes = await Like.find();
+    for (const like of likes) {
+        await Like.findByIdAndDelete(like._id);
+    }
+    res.json('likes deleted');
+}
+
 module.exports = ctrl;

@@ -43,6 +43,7 @@ module.exports = app => {
     router.get('/user/id/:id', user.viewById);
     router.post('/user', user.create);
     router.get('/user/subscription/:user_id/:course_id', user.subscription);
+    router.get('/user/cancelSubscription/:user_id/:course_id', user.cancelSubscription);
     router.put('/user/:id', user.update);
     router.delete('/user/:id', user.delete);
 
@@ -55,6 +56,8 @@ module.exports = app => {
     router.get('/like/post/:user_id/:post_id', like.post);
     router.get('/like/post/make/:user_id/:post_id', like.postchange);
     router.get('/like/comment/:user_id/:comment_id', like.comment);
+    router.delete('/like/post/:entity_id', like.delete);
+    router.delete('/like/comment/:entity_id', like.delete);
 
     app.use(router);
 }

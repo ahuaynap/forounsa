@@ -21,14 +21,11 @@ export class CourseComponent implements OnInit {
               private storage: AngularFireStorage, private authService: AuthService) { }
 
   private id: string;
-  private course: Course = {
-    description: '', name: '', likes: 0, idCareer: '', idPrerequisite: [] , state: '', views: 0, credit: 0, idCourse: '', semester: 0,
-  };
+  private course: Course = {};
   private currentUser: User;
   private posts: Post[];
-  private newPost: Post = {
-    name: '', description: ''
-  };
+  private newPost: Post = {};
+  private susbscribeCourse: boolean;
   private file = null;
   private filePath = null;
   uploadPercent: Observable<number>;
@@ -36,10 +33,46 @@ export class CourseComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.getCurrentUser();
     this.getCourse();
   }
 
+  getCurrentUser() {
+    this.authService.isAuth().subscribe( auth => {
+        this.dataService.getUser(auth.email).subscribe(
+          res => {
+            this.currentUser = res;
+            this.susbscribeCourse = this.currentUser.subscription.includes(this.course._id);
+          }
+        );
+    });
+  }
+  getCourse() {
+    this.dataService.getCourse(this.id).subscribe(
+      res => {
+        this.course = res;
+        this.getCurrentUser();
+        this.getPosts();
+      },
+      error => console.error()
+    );
+  }
+  subscribeCourse() {
+    this.dataService.addSubscription(this.currentUser._id, this.id).subscribe(
+      res => this.getCurrentUser()
+    );
+  }
+  cancelSubscribeCourse() {
+    this.dataService.cancelSubscription(this.currentUser._id, this.id).subscribe(
+      res => this.getCurrentUser()
+    );
+  }
+  getPosts() {
+    this.dataService.getPostsCourse(this.id).subscribe(
+      res => {
+        this.posts = res;
+      }
+    );
+  }
   onUpload(e) {
     const idFile = Math.random().toString(36).substring(2);
     this.file = e.target.files[0];
@@ -50,36 +83,6 @@ export class CourseComponent implements OnInit {
     task.snapshotChanges().pipe( finalize(() => {
       this.urlImage = ref.getDownloadURL();
     }) ).subscribe();
-  }
-
-  getCourse() {
-    this.dataService.getCourse(this.id).subscribe(
-      res => {
-        this.course = res;
-        this.getPosts();
-      },
-      error => console.error()
-    );
-  }
-
-  getPosts() {
-    this.dataService.getPostsCourse(this.id).subscribe(
-      res => {
-        this.posts = res;
-      }
-    );
-  }
-
-  getCurrentUser() {
-    this.authService.isAuth().subscribe( auth => {
-        this.dataService.getUser(auth.email).subscribe(
-          res => {
-            this.currentUser = res;
-            console.log(this.currentUser);
-            return true;
-          }
-        );
-    });
   }
 
   onSubmit(postForm: NgForm) {
@@ -104,12 +107,6 @@ export class CourseComponent implements OnInit {
       this.file = null;
       this.filePath = null;
     }
-  }
-
-  subscribeCourse() {
-    this.dataService.addSubscription(this.currentUser._id, this.id).subscribe(
-      res => console.log(res)
-    );
   }
 
 }

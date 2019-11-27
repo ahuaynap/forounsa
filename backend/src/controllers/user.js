@@ -39,6 +39,15 @@ ctrl.subscription = async(req,res)=>{
         res.json(user);
     }
 }
+ctrl.cancelSubscription = async(req,res)=>{
+    const user = await User.findById(req.params.user_id);
+    if(user){
+        const i = user.subscription.indexOf(req.params.course_id);
+        user.subscription.splice(i, 1);
+        await user.save();
+        res.json(user);
+    }
+}
 ctrl.update = async(req, res) =>{
     const currentUser = await User.findById(req.params.id);
     if(currentUser){
