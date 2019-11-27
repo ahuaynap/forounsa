@@ -75,7 +75,10 @@
                         </div>
                         <div class="modal-footer">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary float-right" (click)="resetForm(productForm);close.click()">
+                                <button type="submit" class="btn btn-primary float-right" *ngIf="fileSuccesful" (click)="resetForm(productForm);close.click()">
+                                    <i class="fa fa-plus-circle"></i> Publicar
+                                </button>
+                                <button type="submit" class="btn btn-secondary float-right" disabled *ngIf="!fileSuccesful">
                                     <i class="fa fa-plus-circle"></i> Publicar
                                 </button>
                                 <button class="btn btn-secondary" type="reset" (click)="resetForm(productForm);close.click()">

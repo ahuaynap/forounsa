@@ -19,11 +19,6 @@
         <a class="nav-link" routerLink="/posts">Mis publicaciones</a>
       </li>
       <li class="nav-item" *ngIf="isLogged" style="cursor: pointer">
-          <a type="button" class="nav-link">
-            Notifications <span class="badge badge-light">4</span>
-        </a>
-      </li>
-      <li class="nav-item" *ngIf="isLogged" style="cursor: pointer">
         <a class="nav-link" (click)="onLogout()">Cerrar Sesión</a>
       </li>
     </ul>

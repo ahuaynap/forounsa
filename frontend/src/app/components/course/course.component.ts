@@ -28,6 +28,7 @@ export class CourseComponent implements OnInit {
   private susbscribeCourse: boolean;
   private file = null;
   private filePath = null;
+  fileSuccesful = true;
   uploadPercent: Observable<number>;
   urlImage: Observable<string>;
 
@@ -74,6 +75,7 @@ export class CourseComponent implements OnInit {
     );
   }
   onUpload(e) {
+    this.fileSuccesful = false;
     const idFile = Math.random().toString(36).substring(2);
     this.file = e.target.files[0];
     this.filePath = `upload/${idFile}`;
@@ -82,7 +84,9 @@ export class CourseComponent implements OnInit {
     this.uploadPercent = task.percentageChanges();
     task.snapshotChanges().pipe( finalize(() => {
       this.urlImage = ref.getDownloadURL();
-    }) ).subscribe();
+    }) ).subscribe(
+      res => this.fileSuccesful = true
+    );
   }
 
   onSubmit(postForm: NgForm) {
@@ -94,7 +98,7 @@ export class CourseComponent implements OnInit {
       );
     }
     this.dataService.addPost(this.newPost, this.course._id).subscribe(
-      res => console.log(res),
+      res => this.getPosts(),
       err => console.log(err)
     );
     this.resetForm(postForm);
