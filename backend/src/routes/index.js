@@ -11,6 +11,8 @@ const like = require('../controllers/like');
 
 module.exports = app => {
 
+    router.get('/topTen', course.topTen);
+
     router.get('/career', career.index);
     router.get('/career/:id', career.view);
     router.post('/career', career.create);

@@ -10,6 +10,7 @@ import { PostsComponent } from './components/posts/posts.component';
 import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CareersComponent } from './components/careers/careers.component';
+import { ChartsComponent } from './components/charts/charts.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
   }, {
     path: 'careers',
     component: CareersComponent
+  },
+  {
+    path: 'reports',
+    component: ChartsComponent
   },
   {
     path: '**',

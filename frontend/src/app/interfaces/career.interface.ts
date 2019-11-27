@@ -1,9 +1,10 @@
 
 export interface Career {
-    id?: number;
-    code: string;
-    name: string;
-    description: string;
-    state: string;
+    id?: string;
+    _id?: string;
+    code?: string;
+    name?: string;
+    description?: string;
+    state?: string;
 
 }
