@@ -39,7 +39,7 @@ export class CoursesComponent implements OnInit {
           width: '100px',
           height: '50px',
           shape: 'round-rectangle',
-          'border-color': 'green',
+          'border-color': 'black',
           'border-width': '1px',
           'background-color': 'white',
           'font-size': 9,

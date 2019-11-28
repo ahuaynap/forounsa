@@ -6,30 +6,40 @@ const ctrl = {}
 
 ctrl.topTen = async (req, res) => {
     //query
-    const courses = await Course.find({}).then((courses) => {
-        courses.forEach((course, indexCourse, someArray) => {
-            var totalComments = 0;
-            console.log(course.name);
 
-            Post.find({
-                idCourse: course._id
-            }).then((posts) => {
-                posts.forEach((post, indexPost, someArray2) => {
-                    Comment.find({
-                        idPost: post._id
-                    }).countDocuments((err3, count) => {
-                        if (err3) console.log(err3);
-                        //totalComments = totalComments + count;
-                    }).then((count) => {
-                        totalComments = totalComments + count;
-                    });
-                });
-            });
+    const posts = await Post.find({}, {
+        "idCourse": 1,
+    });
 
-            console.log(totalComments);
+    const comments = await Comment.find({}, {
+        "idPost": 1,
+        "_id": 0
+    });
+
+    var allCourses = {};
+    var top = {};
+
+    await comments.forEach(comment => {
+        posts.forEach(post => {
+            if (JSON.stringify(post._id) == JSON.stringify(comment.idPost)) {
+                if (post.idCourse in allCourses) {
+                    allCourses[post.idCourse]++;
+                } else {
+                    allCourses[post.idCourse] = 1;
+                }
+            }
         });
     });
-    res.json(courses);
+
+    for (const id in allCourses) {
+        const course = await Course.findById(id, {
+            "name": 1,
+            "_id": 0
+        });
+        top[course.name] = allCourses[id];
+    }
+
+    res.json(top);
 }
 
 ctrl.index = async (req, res) => {

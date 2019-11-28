@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: "montserrat";
+}
+
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.carding {
+  cursor: pointer;
+  width: 500px;
+  height: 480px;
+  min-width: 30%;
+  min-height: 60%;
+}
+
+.fronti,
+.backi {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  transition: transform .6s linear;
+}
+
+.fronti img {
+  height: 100%;
+}
+
+.fronti {
+  transform: perspective(600px) rotateY(0deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backi {
+  border-radius: 5em;
+  background: white;
+  transform: perspective(600px) rotateY(180deg);
+}
+
+.backi-content {
+  color: white;
+  text-align: center;
+  width: 100%;
+
+}
+
+.carding:hover>.fronti {
+  transform: perspective(900px) rotateY(-180deg);
+}
+
+.carding:hover>.backi {
+  transform: perspective(900px) rotateY(0deg);
+}
+
+.texto_fondo {
+  color: black;
+  font-size: 4vw;
+  text-align: center;
+}
+
+.texto_otro {
+  color: black;
+  text-align: center;
+
+}
+
+/*
+.texto_otro:hover {
+  font-size: 5em;
+  color: black;
+  transition: 5s;
+}*/
+
+.box_enviar {
+  border: 0;
+  background: white;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 1px solid black;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.8s;
+  cursor: pointer;
+
+}
+
+/*
+.box_enviar:hover {
+  background: rgb(245, 158, 46);
+  color: black;
+  font-size: 1.5em;
+}*/
+
+.texto_grande {
+  margin: 1em;
+  color: black;
+  text-align: center;
+  border-radius: 1em;
+}
+
+/*
+.texto_grande:hover {
+  border-radius: 2em;
+
+  color: greenyellow;
+  text-align: center;
+  font-size: 1.5em;
+  transition: 5s;
+}*/
