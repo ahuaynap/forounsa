@@ -10,22 +10,26 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class ChartsComponent implements OnInit {
 
-  doughnutChartLabels: Label[] = ['BMW', 'Ford', 'Tesla'];
+  doughnutChartLabels: Label[] = [];
   doughnutChartData: MultiDataSet = [
-    [55, 25, 20]
+    [45, 25, 30]
   ];
   doughnutChartType: ChartType = 'doughnut';
 
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.doughnutChartLabels = ['CS', 'FSI', 'SO'];
     this.getTop();
   }
 
   getTop() {
     this.dataService.getTop().subscribe(res => {
-      console.log(res);
+      let i = 0;
+      for (let course in res) {
+        this.doughnutChartLabels.push(course);
+        this.doughnutChartData[0][i] = res[course];
+        i++;
+      }
     });
   }
 
