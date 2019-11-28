@@ -14,6 +14,7 @@ export class NavBarComponent implements OnInit {
 
   public isLogged = false;
   public currentuser = '';
+  private isAdmin = false;
 
   ngOnInit() {
     this.getCurrentUser();
@@ -25,10 +26,17 @@ export class NavBarComponent implements OnInit {
       if (auth) {
         this.isLogged = true;
         this.currentuser = auth.email;
+        this.currentAdmin(auth.email);
       } else {
         this.isLogged = false;
       }
     });
+  }
+
+  currentAdmin(email) {
+    if (email === 'kbaldarrago@unsa.edu.pe' || email === 'ahuaynap@unsa.edu.pe' || email === 'rvalles@unsa.edu.pe') {
+      this.isAdmin = true;
+    }
   }
 
   onLogout() {

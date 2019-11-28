@@ -1,182 +1,195 @@
-<br>
+<div class="card mt-3">
+  <div class="card-body">
+      <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/careers">Careers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/reports">Reports</a>
+          </li>
+        </ul>
 
-<div class="row">
-  <div class="col-10">
-    <h2>Careers</h2>
-  </div>
-  <div class="col">
-    <button type="button" class="btn btn-dark btn-lg" data-toggle="modal" data-target=".bd-addCareer-modal-lg">
-      Add Career
-    </button>
-  </div>
-</div>
-
-<br>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Code</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Options</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let career of careers; index as i">
-      <th scope="row">{{i + 1}}</th>
-      <td>{{career.code}}</td>
-      <td routerLink="">{{career.name}}</td>
-      <td>{{career.description}}</td>
-      <td>
-        <div class="row">
-          <div class="col-3">
-            <a class="btn btn-dark btn-block text-white" data-toggle="modal" data-target=".bd-editCareer-modal-lg"
-              (click)="getValues(career)">Edit</a>
+    <div class="row">
+          
+      <div class="col-10">
+        <h2>Careers</h2>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-dark btn-lg" data-toggle="modal" data-target=".bd-addCareer-modal-lg">
+          Add Career
+        </button>
+      </div>
+    </div>
+    
+    <br>
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Code</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let career of careers; index as i">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{career.code}}</td>
+          <td routerLink="">{{career.name}}</td>
+          <td>{{career.description}}</td>
+          <td>
+            <div class="row">
+              <div class="col-3">
+                <a class="btn btn-dark btn-block text-white" data-toggle="modal" data-target=".bd-editCareer-modal-lg"
+                  (click)="getValues(career)">Edit</a>
+              </div>
+              <div class="col-4">
+                <a class="btn btn-dark btn-block text-white" (click)="deleteCareer(career)">Delete</a>
+              </div>
+              <div class="col-5">
+                <a class="btn btn-dark btn-block text-white" data-toggle="modal" data-target=".bd-addCourse-modal-lg"
+                  (click)="getValues(career)">Add
+                  Course</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!--Form para editar carrera-->
+    <div class="modal fade bd-editCareer-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalEditCareer"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Edit Career</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" #modalEditCareer>
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <div class="col-4">
-            <a class="btn btn-dark btn-block text-white" (click)="deleteCareer(career)">Delete</a>
-          </div>
-          <div class="col-5">
-            <a class="btn btn-dark btn-block text-white" data-toggle="modal" data-target=".bd-addCourse-modal-lg"
-              (click)="getValues(career)">Add
-              Course</a>
+    
+          <div class="modal-body">
+            <form [formGroup]="editCareerForm" (ngSubmit)="editCareer(editCareerForm.value)">
+              <div class="form-group">
+                <label>Code</label>
+                <input type="text" formControlName="codeEditCareer" class="form-control" placeholder="Code">
+              </div>
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" formControlName="nameEditCareer" class="form-control" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <input type="text" formControlName="descriptionEditCareer" class="form-control" placeholder="Description">
+              </div>
+              <hr>
+              <div class="row float-right">
+                <div class="col">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="col">
+                  <button class="btn btn-dark" [disabled]="editCareerForm.invalid" type="submit">Save</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<!--Form para editar carrera-->
-<div class="modal fade bd-editCareer-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalEditCareer"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Edit Career</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" #modalEditCareer>
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <form [formGroup]="editCareerForm" (ngSubmit)="editCareer(editCareerForm.value)">
-          <div class="form-group">
-            <label>Code</label>
-            <input type="text" formControlName="codeEditCareer" class="form-control" placeholder="Code">
-          </div>
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" formControlName="nameEditCareer" class="form-control" placeholder="Name">
-          </div>
-          <div class="form-group">
-            <label>Description</label>
-            <input type="text" formControlName="descriptionEditCareer" class="form-control" placeholder="Description">
-          </div>
-          <hr>
-          <div class="row float-right">
-            <div class="col">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            </div>
-            <div class="col">
-              <button class="btn btn-dark" [disabled]="editCareerForm.invalid" type="submit">Save</button>
-            </div>
-          </div>
-        </form>
       </div>
     </div>
-  </div>
-</div>
-
-<!--Form para agregar nueva carrera-->
-<div class="modal fade bd-addCareer-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalAddCareer"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Add new Career</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" #modalAddCareer>
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="addCareerForm" (ngSubmit)="addCareer(addCareerForm.value)">
-          <div class="form-group">
-            <label>Code</label>
-            <input type="text" formControlName="codeAddCareer" class="form-control" placeholder="Code">
+    
+    <!--Form para agregar nueva carrera-->
+    <div class="modal fade bd-addCareer-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalAddCareer"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Add new Career</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" #modalAddCareer>
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" formControlName="nameAddCareer" class="form-control" placeholder="Name">
+          <div class="modal-body">
+            <form [formGroup]="addCareerForm" (ngSubmit)="addCareer(addCareerForm.value)">
+              <div class="form-group">
+                <label>Code</label>
+                <input type="text" formControlName="codeAddCareer" class="form-control" placeholder="Code">
+              </div>
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" formControlName="nameAddCareer" class="form-control" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <input type="text" formControlName="descriptionAddCareer" class="form-control" placeholder="Description">
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col self-align-end">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button class="btn btn-dark" [disabled]="addCareerForm.invalid" type="submit">Add Career</button>
+                </div>
+              </div>
+            </form>
           </div>
-          <div class="form-group">
-            <label>Description</label>
-            <input type="text" formControlName="descriptionAddCareer" class="form-control" placeholder="Description">
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col self-align-end">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button class="btn btn-dark" [disabled]="addCareerForm.invalid" type="submit">Add Career</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--Form para agregar curso a una carrera-->
-<div class="modal fade bd-addCourse-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalAddCourse"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Add new Course</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" #modalAddCourse>
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="addCourseForm" (ngSubmit)="addCourse(addCourseForm.value)">
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" formControlName="nameAddCourse" class="form-control" placeholder="Name">
-          </div>
-          <div class="form-group">
-            <label>Credit</label>
-            <input type="text" formControlName="creditAddCourse" class="form-control" placeholder="Credit">
-          </div>
-          <div class="form-group">
-            <label>Semester</label>
-            <input type="text" formControlName="semesterAddCourse" class="form-control" placeholder="Semester">
-          </div>
-          <div class="form-group">
-            <label>Code Course</label>
-            <input type="text" formControlName="idCourseAddCourse" class="form-control" placeholder="Code Course">
-          </div>
-          <div class="form-group">
-            <label>Prerequisite codes</label>
-            <input type="text" formControlName="idPrerequisiteAddCourse" class="form-control"
-              placeholder="Prerequisite codes">
-          </div>
-          <div class="form-group">
-            <label>Description</label>
-            <input type="text" formControlName="descriptionAddCourse" class="form-control" placeholder="Description">
-          </div>
-          <hr>
-          <div class="row float-right">
-            <div class="col">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-            <div class="col-6">
-              <button class="btn btn-dark" [disabled]="addCourseForm.invalid" type="submit">Add Course</button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
-  </div>
+    
+    <!--Form para agregar curso a una carrera-->
+    <div class="modal fade bd-addCourse-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalAddCourse"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Add new Course</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" #modalAddCourse>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="addCourseForm" (ngSubmit)="addCourse(addCourseForm.value)">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" formControlName="nameAddCourse" class="form-control" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <label>Credit</label>
+                <input type="text" formControlName="creditAddCourse" class="form-control" placeholder="Credit">
+              </div>
+              <div class="form-group">
+                <label>Semester</label>
+                <input type="text" formControlName="semesterAddCourse" class="form-control" placeholder="Semester">
+              </div>
+              <div class="form-group">
+                <label>Code Course</label>
+                <input type="text" formControlName="idCourseAddCourse" class="form-control" placeholder="Code Course">
+              </div>
+              <div class="form-group">
+                <label>Prerequisite codes</label>
+                <input type="text" formControlName="idPrerequisiteAddCourse" class="form-control"
+                  placeholder="Prerequisite codes">
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <input type="text" formControlName="descriptionAddCourse" class="form-control" placeholder="Description">
+              </div>
+              <hr>
+              <div class="row float-right">
+                <div class="col">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-dark" [disabled]="addCourseForm.invalid" type="submit">Add Course</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>  
 </div>

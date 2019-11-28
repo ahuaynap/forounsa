@@ -96,11 +96,11 @@
         <div class="card mt-5" *ngFor="let post of posts">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-9">
                         {{post.userName}}
                     </div>
-                    <div class="col-2">
-                        <small class="text-muted">{{post.timestamp}}</small>
+                    <div class="col-3">
+                        <small class="text-muted">{{post.timestamp|date:'medium'}}</small>
                     </div>
                 </div>
             </div>

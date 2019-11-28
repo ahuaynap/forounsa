@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { cytoscape } from 'cytoscape';
 import { Course } from 'src/app/interfaces/course.interface';
+import { Router } from '@angular/router';
 
 declare var cytoscape: any;
 
@@ -17,7 +18,7 @@ export class CoursesComponent implements OnInit {
   public malla: any;
 
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
     this.getProduct();
@@ -58,17 +59,17 @@ export class CoursesComponent implements OnInit {
       .subscribe(
         res => {
           this.courses = res;
-          var nCourses = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-          var nCoursesT = [7, 6, 8, 7, 6, 6, 7, 8, 9, 7];
+          const nCourses = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+          const nCoursesT = [7, 6, 8, 7, 6, 6, 7, 8, 9, 7];
 
-          //adding nodes
+          // adding nodes
           this.courses.forEach(course => {
             this.malla.add({
               group: 'nodes',
               data: {
                 id: course.idCourse,
                 name: course.name,
-                href: "/course/" + course._id
+                href: '/course/' + course._id
               }, position: {
                 x: nCourses[course.semester - 1] * (1100 / nCoursesT[course.semester - 1]) + ((10 - nCoursesT[course.semester - 1]) * 28),
                 y: 130 * (course.semester - 1) + 60
@@ -78,28 +79,27 @@ export class CoursesComponent implements OnInit {
 
           });
 
-          //adding edges
+          // adding edges
           this.courses.forEach(course => {
             if (course.idPrerequisite) {
-              if (course.idPrerequisite[0] != "") {
+              if (course.idPrerequisite[0] !== '') {
                 course.idPrerequisite.forEach(prerequisite => {
                   this.malla.add({
                     group: 'edges',
                     data: {
-                      id: prerequisite + "-" + course.idCourse,
+                      id: prerequisite + '-' + course.idCourse,
                       source: prerequisite,
                       target: course.idCourse,
                     }
-                  })
+                  });
                 });
               }
             }
-          })
+          });
 
           this.malla.on('tap', 'node', (evt) => {
-            var node = evt.target;
-            console.log(node.data().href);
-            window.location.href = node.data().href + '/';
+            const node = evt.target;
+            this.router.navigate([node.data().href + '/']);
           });
 
         },

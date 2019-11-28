@@ -7,7 +7,7 @@
                         {{post.userName}}
                     </div>
                     <div class="col-3 text-muted">
-                        {{post.timestamp}}
+                        {{post.timestamp|date:'medium'}}
                     </div>
                     <div class="col-1 text-muted" *ngIf="isUser">
                         <button (click)="deletePost()" class="close" aria-label="Close">
